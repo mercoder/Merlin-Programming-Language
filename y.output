@@ -1,0 +1,4181 @@
+Terminals unused in grammar
+
+    DO
+    LSB
+    RSB
+
+
+State 191 conflicts: 17 shift/reduce
+State 194 conflicts: 13 shift/reduce
+State 195 conflicts: 13 shift/reduce
+State 196 conflicts: 13 shift/reduce
+State 197 conflicts: 13 shift/reduce
+State 198 conflicts: 13 shift/reduce
+State 199 conflicts: 13 shift/reduce
+State 200 conflicts: 13 shift/reduce
+State 201 conflicts: 13 shift/reduce
+State 202 conflicts: 13 shift/reduce
+State 203 conflicts: 13 shift/reduce
+State 204 conflicts: 13 shift/reduce
+State 205 conflicts: 13 shift/reduce
+State 206 conflicts: 13 shift/reduce
+
+
+Grammar
+
+    0 $accept: prm $end
+
+    1 $@1: %empty
+
+    2 $@2: %empty
+
+    3 prm: PRM1 PRM2 $@1 STATEMENTS PRM3 $@2 AFTER
+
+    4 AFTER: FUNC_STMT AFTER
+    5      | INL_STMT AFTER
+    6      | %empty
+
+    7 STATEMENTS: STATEMENTS STATEMENT
+    8           | STATEMENT
+
+    9 STATEMENT: DATA_TYPE VAR_LIST END
+   10          | INP LB READ_VAR_LIST RB END
+   11          | DICT LT DATA_TYPE GT VAR LB DIGIT1 RB END
+   12          | DICT LT DATA_TYPE GT VAR LB DIGIT1 RB LB DIGIT1 RB END
+
+   13 $@3: %empty
+
+   14 $@4: %empty
+
+   15 STATEMENT: VAR $@3 EQ $@4 EQ_RHS END
+   16          | PTR_STMT
+   17          | NEW_STMT
+   18          | IF_STMT ELSEIF_STMT ELSE_STMT
+   19          | IF_STMT IFEND
+   20          | GOTO VAR CLN
+   21          | VAR DS
+   22          | WHILE_STMT WHILEEND
+
+   23 $@5: %empty
+
+   24 $@6: %empty
+
+   25 $@7: %empty
+
+   26 STATEMENT: REPEAT $@5 STATEMENTS $@6 UNTIL LB $@7 A_EXPN RB CLN
+
+   27 $@8: %empty
+
+   28 $@9: %empty
+
+   29 STATEMENT: FOR VAR FROM DIGIT1 TO DIGIT1 BY DIGIT1 CLN $@8 STATEMENTS $@9 FOREND
+   30          | OUT LB OUT_STMT RB END
+
+   31 $@10: %empty
+
+   32 STATEMENT: VAR LB $@10 CALL_PARA RB END
+   33          | SLC
+   34          | MLC
+
+   35 $@11: %empty
+
+   36 $@12: %empty
+
+   37 IF_STMT: IF LB $@11 A_EXPN RB CLN $@12 STATEMENTS
+
+   38 ELSEIF_STMT: ELSEIF_STMT ELSEIF_STMT1
+   39            | %empty
+
+   40 $@13: %empty
+
+   41 $@14: %empty
+
+   42 ELSEIF_STMT1: ELSEIF LB $@13 A_EXPN RB CLN $@14 STATEMENTS
+
+   43 $@15: %empty
+
+   44 ELSE_STMT: ELSE CLN $@15 STATEMENTS
+
+   45 $@16: %empty
+
+   46 $@17: %empty
+
+   47 WHILE_STMT: WHILE LB $@16 A_EXPN RB CLN $@17 STATEMENTS
+
+   48 $@18: %empty
+
+   49 READ_VAR_LIST: VAR $@18 COMMA READ_VAR_LIST
+   50              | VAR
+
+   51 DATA_TYPE: NUM1
+   52          | NUM2
+   53          | STRING
+   54          | BOOL
+   55          | VAR
+
+   56 $@19: %empty
+
+   57 VAR_LIST: VAR $@19 COMMA VAR_LIST
+   58         | VAR
+
+   59 EQ_RHS: A_EXPN
+   60       | STR_EQ
+
+   61 $@20: %empty
+
+   62 A_EXPN: A_EXPN AND $@20 A_EXPN
+
+   63 $@21: %empty
+
+   64 A_EXPN: A_EXPN OR $@21 A_EXPN
+
+   65 $@22: %empty
+
+   66 A_EXPN: NOT LB $@22 A_EXPN RB
+
+   67 $@23: %empty
+
+   68 A_EXPN: A_EXPN LT $@23 A_EXPN
+
+   69 $@24: %empty
+
+   70 A_EXPN: A_EXPN GT $@24 A_EXPN
+
+   71 $@25: %empty
+
+   72 A_EXPN: A_EXPN LE $@25 A_EXPN
+
+   73 $@26: %empty
+
+   74 A_EXPN: A_EXPN GE $@26 A_EXPN
+
+   75 $@27: %empty
+
+   76 A_EXPN: A_EXPN ET $@27 A_EXPN
+
+   77 $@28: %empty
+
+   78 A_EXPN: A_EXPN NE $@28 A_EXPN
+
+   79 $@29: %empty
+
+   80 A_EXPN: A_EXPN ADD $@29 A_EXPN
+
+   81 $@30: %empty
+
+   82 A_EXPN: A_EXPN MIN $@30 A_EXPN
+
+   83 $@31: %empty
+
+   84 A_EXPN: A_EXPN MULT $@31 A_EXPN
+
+   85 $@32: %empty
+
+   86 A_EXPN: A_EXPN DIV $@32 A_EXPN
+
+   87 $@33: %empty
+
+   88 A_EXPN: A_EXPN MOD $@33 A_EXPN
+   89       | END_A_EXPN
+
+   90 $@34: %empty
+
+   91 STR_EQ: LCB SQUOTE $@34 STR_EQ1 RCB
+
+   92 $@35: %empty
+
+   93 STR_EQ: LCB DIGIT1 $@35 STR_EQ1 RCB
+
+   94 $@36: %empty
+
+   95 STR_EQ: LCB DIGIT2 $@36 STR_EQ1 RCB
+
+   96 STR_EQ1: STR_EQ2 STR_EQ4
+
+   97 STR_EQ2: %empty
+   98        | STR_EQ3
+
+   99 STR_EQ3: COMMA
+  100        | CLN
+
+  101 $@37: %empty
+
+  102 STR_EQ4: SQUOTE $@37 STR_EQ1
+
+  103 $@38: %empty
+
+  104 STR_EQ4: DIGIT1 $@38 STR_EQ1
+
+  105 $@39: %empty
+
+  106 STR_EQ4: DIGIT2 $@39 STR_EQ1
+  107        | %empty
+
+  108 END_A_EXPN: VAR
+  109           | SQUOTE
+  110           | DIGIT1
+  111           | DIGIT2
+  112           | TRUE
+  113           | FALSE
+
+  114 $@40: %empty
+
+  115 OUT_STMT: VAR $@40 COMMA VAR_MORE
+  116         | DQUOTE
+  117         | VAR_MORE
+
+  118 VAR_MORE: VAR
+
+  119 $@41: %empty
+
+  120 $@42: %empty
+
+  121 $@43: %empty
+
+  122 FUNC_STMT: DATA_TYPE VAR LB $@41 DEF_PARA RB CLN $@42 STATEMENTS RET $@43 A_EXPN END
+
+  123 $@44: %empty
+
+  124 INL_STMT: INLFUNC $@44 FUNC_STMT
+
+  125 $@45: %empty
+
+  126 PTR_STMT: DATA_TYPE POINTER VAR EQ AT VAR COMMA $@45 PTR_STMT1 END
+  127         | POINTER VAR EQ DIGIT1 END
+  128         | POINTER VAR EQ DIGIT2 END
+  129         | POINTER VAR EQ SQUOTE END
+
+  130 $@46: %empty
+
+  131 PTR_STMT1: VAR EQ AT VAR COMMA $@46 PTR_STMT1
+  132          | VAR EQ AT VAR
+
+  133 $@47: %empty
+
+  134 NEW_STMT: NEW $@47 DATA_TYPE VAR END
+
+  135 CALL_PARA: CALL_PARA COMMA VAR
+  136          | CALL_PARA COMMA DIGIT1
+  137          | CALL_PARA COMMA DIGIT2
+  138          | CALL_PARA COMMA SQUOTE
+  139          | CALL_PARA COMMA TRUE
+  140          | CALL_PARA COMMA FALSE
+  141          | VAR
+  142          | DIGIT1
+  143          | DIGIT2
+  144          | SQUOTE
+  145          | TRUE
+  146          | FALSE
+  147          | %empty
+
+  148 $@48: %empty
+
+  149 DEF_PARA: DATA_TYPE VAR COMMA $@48 DEF_PARA
+  150         | DATA_TYPE VAR
+  151         | %empty
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    PRM1 (258) 3
+    PRM2 (259) 3
+    PRM3 (260) 3
+    END (261) 9 10 11 12 15 30 32 122 126 127 128 129 134
+    EQ (262) 15 126 127 128 129 131 132
+    COMMA (263) 49 57 99 115 126 131 135 136 137 138 139 140 149
+    DIGIT1 <var_name> (264) 11 12 29 93 104 110 127 136 142
+    DIGIT2 <var_name> (265) 95 106 111 128 137 143
+    ADD (266) 80
+    MIN (267) 82
+    MULT (268) 84
+    DIV (269) 86
+    MOD (270) 88
+    SLC (271) 33
+    MLC (272) 34
+    LT (273) 11 12 68
+    GT (274) 11 12 70
+    LE (275) 72
+    GE (276) 74
+    ET (277) 76
+    NE (278) 78
+    AND (279) 62
+    OR (280) 64
+    NOT (281) 66
+    LB (282) 10 11 12 26 30 32 37 42 47 66 122
+    RB (283) 10 11 12 26 30 32 37 42 47 66 122
+    TRUE (284) 112 139 145
+    FALSE (285) 113 140 146
+    IF (286) 37
+    ELSEIF (287) 42
+    ELSE (288) 44
+    CLN (289) 20 26 29 37 42 44 47 100 122
+    GOTO (290) 20
+    DS (291) 21
+    WHILE (292) 47
+    DO (293)
+    IFEND (294) 19
+    WHILEEND (295) 22
+    REPEAT (296) 26
+    UNTIL (297) 26
+    FOR (298) 29
+    FROM (299) 29
+    TO (300) 29
+    BY (301) 29
+    FOREND (302) 29
+    VAR <var_name> (303) 11 12 15 20 21 29 32 49 50 55 57 58 108 115 118 122 126 127 128 129 131 132 134 135 141 149 150
+    SQUOTE (304) 91 102 109 129 138 144
+    DQUOTE (305) 116
+    INP (306) 10
+    OUT (307) 30
+    RET (308) 122
+    INLFUNC (309) 124
+    POINTER (310) 126 127 128 129
+    AT (311) 126 131 132
+    NEW (312) 134
+    LSB (313)
+    RSB (314)
+    DICT (315) 11 12
+    LCB (316) 91 93 95
+    RCB (317) 91 93 95
+    NUM1 <data_type> (318) 51
+    NUM2 <data_type> (319) 52
+    STRING <data_type> (320) 53
+    BOOL <data_type> (321) 54
+
+
+Nonterminals, with rules where they appear
+
+    $accept (67)
+        on left: 0
+    prm (68)
+        on left: 3
+        on right: 0
+    $@1 (69)
+        on left: 1
+        on right: 3
+    $@2 (70)
+        on left: 2
+        on right: 3
+    AFTER (71)
+        on left: 4 5 6
+        on right: 3 4 5
+    STATEMENTS (72)
+        on left: 7 8
+        on right: 3 7 26 29 37 42 44 47 122
+    STATEMENT (73)
+        on left: 9 10 11 12 15 16 17 18 19 20 21 22 26 29 30 32 33 34
+        on right: 7 8
+    $@3 (74)
+        on left: 13
+        on right: 15
+    $@4 (75)
+        on left: 14
+        on right: 15
+    $@5 (76)
+        on left: 23
+        on right: 26
+    $@6 (77)
+        on left: 24
+        on right: 26
+    $@7 (78)
+        on left: 25
+        on right: 26
+    $@8 (79)
+        on left: 27
+        on right: 29
+    $@9 (80)
+        on left: 28
+        on right: 29
+    $@10 (81)
+        on left: 31
+        on right: 32
+    IF_STMT (82)
+        on left: 37
+        on right: 18 19
+    $@11 (83)
+        on left: 35
+        on right: 37
+    $@12 (84)
+        on left: 36
+        on right: 37
+    ELSEIF_STMT (85)
+        on left: 38 39
+        on right: 18 38
+    ELSEIF_STMT1 (86)
+        on left: 42
+        on right: 38
+    $@13 (87)
+        on left: 40
+        on right: 42
+    $@14 (88)
+        on left: 41
+        on right: 42
+    ELSE_STMT (89)
+        on left: 44
+        on right: 18
+    $@15 (90)
+        on left: 43
+        on right: 44
+    WHILE_STMT (91)
+        on left: 47
+        on right: 22
+    $@16 (92)
+        on left: 45
+        on right: 47
+    $@17 (93)
+        on left: 46
+        on right: 47
+    READ_VAR_LIST (94)
+        on left: 49 50
+        on right: 10 49
+    $@18 (95)
+        on left: 48
+        on right: 49
+    DATA_TYPE <data_type> (96)
+        on left: 51 52 53 54 55
+        on right: 9 11 12 122 126 134 149 150
+    VAR_LIST (97)
+        on left: 57 58
+        on right: 9 57
+    $@19 (98)
+        on left: 56
+        on right: 57
+    EQ_RHS (99)
+        on left: 59 60
+        on right: 15
+    A_EXPN (100)
+        on left: 62 64 66 68 70 72 74 76 78 80 82 84 86 88 89
+        on right: 26 37 42 47 59 62 64 66 68 70 72 74 76 78 80 82 84 86 88 122
+    $@20 (101)
+        on left: 61
+        on right: 62
+    $@21 (102)
+        on left: 63
+        on right: 64
+    $@22 (103)
+        on left: 65
+        on right: 66
+    $@23 (104)
+        on left: 67
+        on right: 68
+    $@24 (105)
+        on left: 69
+        on right: 70
+    $@25 (106)
+        on left: 71
+        on right: 72
+    $@26 (107)
+        on left: 73
+        on right: 74
+    $@27 (108)
+        on left: 75
+        on right: 76
+    $@28 (109)
+        on left: 77
+        on right: 78
+    $@29 (110)
+        on left: 79
+        on right: 80
+    $@30 (111)
+        on left: 81
+        on right: 82
+    $@31 (112)
+        on left: 83
+        on right: 84
+    $@32 (113)
+        on left: 85
+        on right: 86
+    $@33 (114)
+        on left: 87
+        on right: 88
+    STR_EQ (115)
+        on left: 91 93 95
+        on right: 60
+    $@34 (116)
+        on left: 90
+        on right: 91
+    $@35 (117)
+        on left: 92
+        on right: 93
+    $@36 (118)
+        on left: 94
+        on right: 95
+    STR_EQ1 (119)
+        on left: 96
+        on right: 91 93 95 102 104 106
+    STR_EQ2 (120)
+        on left: 97 98
+        on right: 96
+    STR_EQ3 (121)
+        on left: 99 100
+        on right: 98
+    STR_EQ4 (122)
+        on left: 102 104 106 107
+        on right: 96
+    $@37 (123)
+        on left: 101
+        on right: 102
+    $@38 (124)
+        on left: 103
+        on right: 104
+    $@39 (125)
+        on left: 105
+        on right: 106
+    END_A_EXPN (126)
+        on left: 108 109 110 111 112 113
+        on right: 89
+    OUT_STMT (127)
+        on left: 115 116 117
+        on right: 30
+    $@40 (128)
+        on left: 114
+        on right: 115
+    VAR_MORE (129)
+        on left: 118
+        on right: 115 117
+    FUNC_STMT (130)
+        on left: 122
+        on right: 4 124
+    $@41 (131)
+        on left: 119
+        on right: 122
+    $@42 (132)
+        on left: 120
+        on right: 122
+    $@43 (133)
+        on left: 121
+        on right: 122
+    INL_STMT (134)
+        on left: 124
+        on right: 5
+    $@44 (135)
+        on left: 123
+        on right: 124
+    PTR_STMT (136)
+        on left: 126 127 128 129
+        on right: 16
+    $@45 (137)
+        on left: 125
+        on right: 126
+    PTR_STMT1 (138)
+        on left: 131 132
+        on right: 126 131
+    $@46 (139)
+        on left: 130
+        on right: 131
+    NEW_STMT (140)
+        on left: 134
+        on right: 17
+    $@47 (141)
+        on left: 133
+        on right: 134
+    CALL_PARA (142)
+        on left: 135 136 137 138 139 140 141 142 143 144 145 146 147
+        on right: 32 135 136 137 138 139 140
+    DEF_PARA (143)
+        on left: 149 150 151
+        on right: 122 149
+    $@48 (144)
+        on left: 148
+        on right: 149
+
+
+State 0
+
+    0 $accept: . prm $end
+
+    PRM1  shift, and go to state 1
+
+    prm  go to state 2
+
+
+State 1
+
+    3 prm: PRM1 . PRM2 $@1 STATEMENTS PRM3 $@2 AFTER
+
+    PRM2  shift, and go to state 3
+
+
+State 2
+
+    0 $accept: prm . $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    3 prm: PRM1 PRM2 . $@1 STATEMENTS PRM3 $@2 AFTER
+
+    $default  reduce using rule 1 ($@1)
+
+    $@1  go to state 5
+
+
+State 4
+
+    0 $accept: prm $end .
+
+    $default  accept
+
+
+State 5
+
+    3 prm: PRM1 PRM2 $@1 . STATEMENTS PRM3 $@2 AFTER
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    STATEMENTS  go to state 23
+    STATEMENT   go to state 24
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 6
+
+   33 STATEMENT: SLC .
+
+    $default  reduce using rule 33 (STATEMENT)
+
+
+State 7
+
+   34 STATEMENT: MLC .
+
+    $default  reduce using rule 34 (STATEMENT)
+
+
+State 8
+
+   37 IF_STMT: IF . LB $@11 A_EXPN RB CLN $@12 STATEMENTS
+
+    LB  shift, and go to state 30
+
+
+State 9
+
+   20 STATEMENT: GOTO . VAR CLN
+
+    VAR  shift, and go to state 31
+
+
+State 10
+
+   47 WHILE_STMT: WHILE . LB $@16 A_EXPN RB CLN $@17 STATEMENTS
+
+    LB  shift, and go to state 32
+
+
+State 11
+
+   26 STATEMENT: REPEAT . $@5 STATEMENTS $@6 UNTIL LB $@7 A_EXPN RB CLN
+
+    $default  reduce using rule 23 ($@5)
+
+    $@5  go to state 33
+
+
+State 12
+
+   29 STATEMENT: FOR . VAR FROM DIGIT1 TO DIGIT1 BY DIGIT1 CLN $@8 STATEMENTS $@9 FOREND
+
+    VAR  shift, and go to state 34
+
+
+State 13
+
+   15 STATEMENT: VAR . $@3 EQ $@4 EQ_RHS END
+   21          | VAR . DS
+   32          | VAR . LB $@10 CALL_PARA RB END
+   55 DATA_TYPE: VAR .
+
+    LB  shift, and go to state 35
+    DS  shift, and go to state 36
+
+    EQ        reduce using rule 13 ($@3)
+    $default  reduce using rule 55 (DATA_TYPE)
+
+    $@3  go to state 37
+
+
+State 14
+
+   10 STATEMENT: INP . LB READ_VAR_LIST RB END
+
+    LB  shift, and go to state 38
+
+
+State 15
+
+   30 STATEMENT: OUT . LB OUT_STMT RB END
+
+    LB  shift, and go to state 39
+
+
+State 16
+
+  127 PTR_STMT: POINTER . VAR EQ DIGIT1 END
+  128         | POINTER . VAR EQ DIGIT2 END
+  129         | POINTER . VAR EQ SQUOTE END
+
+    VAR  shift, and go to state 40
+
+
+State 17
+
+  134 NEW_STMT: NEW . $@47 DATA_TYPE VAR END
+
+    $default  reduce using rule 133 ($@47)
+
+    $@47  go to state 41
+
+
+State 18
+
+   11 STATEMENT: DICT . LT DATA_TYPE GT VAR LB DIGIT1 RB END
+   12          | DICT . LT DATA_TYPE GT VAR LB DIGIT1 RB LB DIGIT1 RB END
+
+    LT  shift, and go to state 42
+
+
+State 19
+
+   51 DATA_TYPE: NUM1 .
+
+    $default  reduce using rule 51 (DATA_TYPE)
+
+
+State 20
+
+   52 DATA_TYPE: NUM2 .
+
+    $default  reduce using rule 52 (DATA_TYPE)
+
+
+State 21
+
+   53 DATA_TYPE: STRING .
+
+    $default  reduce using rule 53 (DATA_TYPE)
+
+
+State 22
+
+   54 DATA_TYPE: BOOL .
+
+    $default  reduce using rule 54 (DATA_TYPE)
+
+
+State 23
+
+    3 prm: PRM1 PRM2 $@1 STATEMENTS . PRM3 $@2 AFTER
+    7 STATEMENTS: STATEMENTS . STATEMENT
+
+    PRM3     shift, and go to state 43
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    STATEMENT   go to state 44
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 24
+
+    8 STATEMENTS: STATEMENT .
+
+    $default  reduce using rule 8 (STATEMENTS)
+
+
+State 25
+
+   18 STATEMENT: IF_STMT . ELSEIF_STMT ELSE_STMT
+   19          | IF_STMT . IFEND
+
+    IFEND  shift, and go to state 45
+
+    $default  reduce using rule 39 (ELSEIF_STMT)
+
+    ELSEIF_STMT  go to state 46
+
+
+State 26
+
+   22 STATEMENT: WHILE_STMT . WHILEEND
+
+    WHILEEND  shift, and go to state 47
+
+
+State 27
+
+    9 STATEMENT: DATA_TYPE . VAR_LIST END
+  126 PTR_STMT: DATA_TYPE . POINTER VAR EQ AT VAR COMMA $@45 PTR_STMT1 END
+
+    VAR      shift, and go to state 48
+    POINTER  shift, and go to state 49
+
+    VAR_LIST  go to state 50
+
+
+State 28
+
+   16 STATEMENT: PTR_STMT .
+
+    $default  reduce using rule 16 (STATEMENT)
+
+
+State 29
+
+   17 STATEMENT: NEW_STMT .
+
+    $default  reduce using rule 17 (STATEMENT)
+
+
+State 30
+
+   37 IF_STMT: IF LB . $@11 A_EXPN RB CLN $@12 STATEMENTS
+
+    $default  reduce using rule 35 ($@11)
+
+    $@11  go to state 51
+
+
+State 31
+
+   20 STATEMENT: GOTO VAR . CLN
+
+    CLN  shift, and go to state 52
+
+
+State 32
+
+   47 WHILE_STMT: WHILE LB . $@16 A_EXPN RB CLN $@17 STATEMENTS
+
+    $default  reduce using rule 45 ($@16)
+
+    $@16  go to state 53
+
+
+State 33
+
+   26 STATEMENT: REPEAT $@5 . STATEMENTS $@6 UNTIL LB $@7 A_EXPN RB CLN
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    STATEMENTS  go to state 54
+    STATEMENT   go to state 24
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 34
+
+   29 STATEMENT: FOR VAR . FROM DIGIT1 TO DIGIT1 BY DIGIT1 CLN $@8 STATEMENTS $@9 FOREND
+
+    FROM  shift, and go to state 55
+
+
+State 35
+
+   32 STATEMENT: VAR LB . $@10 CALL_PARA RB END
+
+    $default  reduce using rule 31 ($@10)
+
+    $@10  go to state 56
+
+
+State 36
+
+   21 STATEMENT: VAR DS .
+
+    $default  reduce using rule 21 (STATEMENT)
+
+
+State 37
+
+   15 STATEMENT: VAR $@3 . EQ $@4 EQ_RHS END
+
+    EQ  shift, and go to state 57
+
+
+State 38
+
+   10 STATEMENT: INP LB . READ_VAR_LIST RB END
+
+    VAR  shift, and go to state 58
+
+    READ_VAR_LIST  go to state 59
+
+
+State 39
+
+   30 STATEMENT: OUT LB . OUT_STMT RB END
+
+    VAR     shift, and go to state 60
+    DQUOTE  shift, and go to state 61
+
+    OUT_STMT  go to state 62
+    VAR_MORE  go to state 63
+
+
+State 40
+
+  127 PTR_STMT: POINTER VAR . EQ DIGIT1 END
+  128         | POINTER VAR . EQ DIGIT2 END
+  129         | POINTER VAR . EQ SQUOTE END
+
+    EQ  shift, and go to state 64
+
+
+State 41
+
+  134 NEW_STMT: NEW $@47 . DATA_TYPE VAR END
+
+    VAR     shift, and go to state 65
+    NUM1    shift, and go to state 19
+    NUM2    shift, and go to state 20
+    STRING  shift, and go to state 21
+    BOOL    shift, and go to state 22
+
+    DATA_TYPE  go to state 66
+
+
+State 42
+
+   11 STATEMENT: DICT LT . DATA_TYPE GT VAR LB DIGIT1 RB END
+   12          | DICT LT . DATA_TYPE GT VAR LB DIGIT1 RB LB DIGIT1 RB END
+
+    VAR     shift, and go to state 65
+    NUM1    shift, and go to state 19
+    NUM2    shift, and go to state 20
+    STRING  shift, and go to state 21
+    BOOL    shift, and go to state 22
+
+    DATA_TYPE  go to state 67
+
+
+State 43
+
+    3 prm: PRM1 PRM2 $@1 STATEMENTS PRM3 . $@2 AFTER
+
+    $default  reduce using rule 2 ($@2)
+
+    $@2  go to state 68
+
+
+State 44
+
+    7 STATEMENTS: STATEMENTS STATEMENT .
+
+    $default  reduce using rule 7 (STATEMENTS)
+
+
+State 45
+
+   19 STATEMENT: IF_STMT IFEND .
+
+    $default  reduce using rule 19 (STATEMENT)
+
+
+State 46
+
+   18 STATEMENT: IF_STMT ELSEIF_STMT . ELSE_STMT
+   38 ELSEIF_STMT: ELSEIF_STMT . ELSEIF_STMT1
+
+    ELSEIF  shift, and go to state 69
+    ELSE    shift, and go to state 70
+
+    ELSEIF_STMT1  go to state 71
+    ELSE_STMT     go to state 72
+
+
+State 47
+
+   22 STATEMENT: WHILE_STMT WHILEEND .
+
+    $default  reduce using rule 22 (STATEMENT)
+
+
+State 48
+
+   57 VAR_LIST: VAR . $@19 COMMA VAR_LIST
+   58         | VAR .
+
+    END       reduce using rule 58 (VAR_LIST)
+    $default  reduce using rule 56 ($@19)
+
+    $@19  go to state 73
+
+
+State 49
+
+  126 PTR_STMT: DATA_TYPE POINTER . VAR EQ AT VAR COMMA $@45 PTR_STMT1 END
+
+    VAR  shift, and go to state 74
+
+
+State 50
+
+    9 STATEMENT: DATA_TYPE VAR_LIST . END
+
+    END  shift, and go to state 75
+
+
+State 51
+
+   37 IF_STMT: IF LB $@11 . A_EXPN RB CLN $@12 STATEMENTS
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 83
+    END_A_EXPN  go to state 84
+
+
+State 52
+
+   20 STATEMENT: GOTO VAR CLN .
+
+    $default  reduce using rule 20 (STATEMENT)
+
+
+State 53
+
+   47 WHILE_STMT: WHILE LB $@16 . A_EXPN RB CLN $@17 STATEMENTS
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 85
+    END_A_EXPN  go to state 84
+
+
+State 54
+
+    7 STATEMENTS: STATEMENTS . STATEMENT
+   26 STATEMENT: REPEAT $@5 STATEMENTS . $@6 UNTIL LB $@7 A_EXPN RB CLN
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    $default  reduce using rule 24 ($@6)
+
+    STATEMENT   go to state 44
+    $@6         go to state 86
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 55
+
+   29 STATEMENT: FOR VAR FROM . DIGIT1 TO DIGIT1 BY DIGIT1 CLN $@8 STATEMENTS $@9 FOREND
+
+    DIGIT1  shift, and go to state 87
+
+
+State 56
+
+   32 STATEMENT: VAR LB $@10 . CALL_PARA RB END
+
+    DIGIT1  shift, and go to state 88
+    DIGIT2  shift, and go to state 89
+    TRUE    shift, and go to state 90
+    FALSE   shift, and go to state 91
+    VAR     shift, and go to state 92
+    SQUOTE  shift, and go to state 93
+
+    $default  reduce using rule 147 (CALL_PARA)
+
+    CALL_PARA  go to state 94
+
+
+State 57
+
+   15 STATEMENT: VAR $@3 EQ . $@4 EQ_RHS END
+
+    $default  reduce using rule 14 ($@4)
+
+    $@4  go to state 95
+
+
+State 58
+
+   49 READ_VAR_LIST: VAR . $@18 COMMA READ_VAR_LIST
+   50              | VAR .
+
+    RB        reduce using rule 50 (READ_VAR_LIST)
+    $default  reduce using rule 48 ($@18)
+
+    $@18  go to state 96
+
+
+State 59
+
+   10 STATEMENT: INP LB READ_VAR_LIST . RB END
+
+    RB  shift, and go to state 97
+
+
+State 60
+
+  115 OUT_STMT: VAR . $@40 COMMA VAR_MORE
+  118 VAR_MORE: VAR .
+
+    RB        reduce using rule 118 (VAR_MORE)
+    $default  reduce using rule 114 ($@40)
+
+    $@40  go to state 98
+
+
+State 61
+
+  116 OUT_STMT: DQUOTE .
+
+    $default  reduce using rule 116 (OUT_STMT)
+
+
+State 62
+
+   30 STATEMENT: OUT LB OUT_STMT . RB END
+
+    RB  shift, and go to state 99
+
+
+State 63
+
+  117 OUT_STMT: VAR_MORE .
+
+    $default  reduce using rule 117 (OUT_STMT)
+
+
+State 64
+
+  127 PTR_STMT: POINTER VAR EQ . DIGIT1 END
+  128         | POINTER VAR EQ . DIGIT2 END
+  129         | POINTER VAR EQ . SQUOTE END
+
+    DIGIT1  shift, and go to state 100
+    DIGIT2  shift, and go to state 101
+    SQUOTE  shift, and go to state 102
+
+
+State 65
+
+   55 DATA_TYPE: VAR .
+
+    $default  reduce using rule 55 (DATA_TYPE)
+
+
+State 66
+
+  134 NEW_STMT: NEW $@47 DATA_TYPE . VAR END
+
+    VAR  shift, and go to state 103
+
+
+State 67
+
+   11 STATEMENT: DICT LT DATA_TYPE . GT VAR LB DIGIT1 RB END
+   12          | DICT LT DATA_TYPE . GT VAR LB DIGIT1 RB LB DIGIT1 RB END
+
+    GT  shift, and go to state 104
+
+
+State 68
+
+    3 prm: PRM1 PRM2 $@1 STATEMENTS PRM3 $@2 . AFTER
+
+    VAR      shift, and go to state 65
+    INLFUNC  shift, and go to state 105
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    $default  reduce using rule 6 (AFTER)
+
+    AFTER      go to state 106
+    DATA_TYPE  go to state 107
+    FUNC_STMT  go to state 108
+    INL_STMT   go to state 109
+
+
+State 69
+
+   42 ELSEIF_STMT1: ELSEIF . LB $@13 A_EXPN RB CLN $@14 STATEMENTS
+
+    LB  shift, and go to state 110
+
+
+State 70
+
+   44 ELSE_STMT: ELSE . CLN $@15 STATEMENTS
+
+    CLN  shift, and go to state 111
+
+
+State 71
+
+   38 ELSEIF_STMT: ELSEIF_STMT ELSEIF_STMT1 .
+
+    $default  reduce using rule 38 (ELSEIF_STMT)
+
+
+State 72
+
+   18 STATEMENT: IF_STMT ELSEIF_STMT ELSE_STMT .
+
+    $default  reduce using rule 18 (STATEMENT)
+
+
+State 73
+
+   57 VAR_LIST: VAR $@19 . COMMA VAR_LIST
+
+    COMMA  shift, and go to state 112
+
+
+State 74
+
+  126 PTR_STMT: DATA_TYPE POINTER VAR . EQ AT VAR COMMA $@45 PTR_STMT1 END
+
+    EQ  shift, and go to state 113
+
+
+State 75
+
+    9 STATEMENT: DATA_TYPE VAR_LIST END .
+
+    $default  reduce using rule 9 (STATEMENT)
+
+
+State 76
+
+  110 END_A_EXPN: DIGIT1 .
+
+    $default  reduce using rule 110 (END_A_EXPN)
+
+
+State 77
+
+  111 END_A_EXPN: DIGIT2 .
+
+    $default  reduce using rule 111 (END_A_EXPN)
+
+
+State 78
+
+   66 A_EXPN: NOT . LB $@22 A_EXPN RB
+
+    LB  shift, and go to state 114
+
+
+State 79
+
+  112 END_A_EXPN: TRUE .
+
+    $default  reduce using rule 112 (END_A_EXPN)
+
+
+State 80
+
+  113 END_A_EXPN: FALSE .
+
+    $default  reduce using rule 113 (END_A_EXPN)
+
+
+State 81
+
+  108 END_A_EXPN: VAR .
+
+    $default  reduce using rule 108 (END_A_EXPN)
+
+
+State 82
+
+  109 END_A_EXPN: SQUOTE .
+
+    $default  reduce using rule 109 (END_A_EXPN)
+
+
+State 83
+
+   37 IF_STMT: IF LB $@11 A_EXPN . RB CLN $@12 STATEMENTS
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+    RB    shift, and go to state 128
+
+
+State 84
+
+   89 A_EXPN: END_A_EXPN .
+
+    $default  reduce using rule 89 (A_EXPN)
+
+
+State 85
+
+   47 WHILE_STMT: WHILE LB $@16 A_EXPN . RB CLN $@17 STATEMENTS
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+    RB    shift, and go to state 129
+
+
+State 86
+
+   26 STATEMENT: REPEAT $@5 STATEMENTS $@6 . UNTIL LB $@7 A_EXPN RB CLN
+
+    UNTIL  shift, and go to state 130
+
+
+State 87
+
+   29 STATEMENT: FOR VAR FROM DIGIT1 . TO DIGIT1 BY DIGIT1 CLN $@8 STATEMENTS $@9 FOREND
+
+    TO  shift, and go to state 131
+
+
+State 88
+
+  142 CALL_PARA: DIGIT1 .
+
+    $default  reduce using rule 142 (CALL_PARA)
+
+
+State 89
+
+  143 CALL_PARA: DIGIT2 .
+
+    $default  reduce using rule 143 (CALL_PARA)
+
+
+State 90
+
+  145 CALL_PARA: TRUE .
+
+    $default  reduce using rule 145 (CALL_PARA)
+
+
+State 91
+
+  146 CALL_PARA: FALSE .
+
+    $default  reduce using rule 146 (CALL_PARA)
+
+
+State 92
+
+  141 CALL_PARA: VAR .
+
+    $default  reduce using rule 141 (CALL_PARA)
+
+
+State 93
+
+  144 CALL_PARA: SQUOTE .
+
+    $default  reduce using rule 144 (CALL_PARA)
+
+
+State 94
+
+   32 STATEMENT: VAR LB $@10 CALL_PARA . RB END
+  135 CALL_PARA: CALL_PARA . COMMA VAR
+  136          | CALL_PARA . COMMA DIGIT1
+  137          | CALL_PARA . COMMA DIGIT2
+  138          | CALL_PARA . COMMA SQUOTE
+  139          | CALL_PARA . COMMA TRUE
+  140          | CALL_PARA . COMMA FALSE
+
+    COMMA  shift, and go to state 132
+    RB     shift, and go to state 133
+
+
+State 95
+
+   15 STATEMENT: VAR $@3 EQ $@4 . EQ_RHS END
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+    LCB     shift, and go to state 134
+
+    EQ_RHS      go to state 135
+    A_EXPN      go to state 136
+    STR_EQ      go to state 137
+    END_A_EXPN  go to state 84
+
+
+State 96
+
+   49 READ_VAR_LIST: VAR $@18 . COMMA READ_VAR_LIST
+
+    COMMA  shift, and go to state 138
+
+
+State 97
+
+   10 STATEMENT: INP LB READ_VAR_LIST RB . END
+
+    END  shift, and go to state 139
+
+
+State 98
+
+  115 OUT_STMT: VAR $@40 . COMMA VAR_MORE
+
+    COMMA  shift, and go to state 140
+
+
+State 99
+
+   30 STATEMENT: OUT LB OUT_STMT RB . END
+
+    END  shift, and go to state 141
+
+
+State 100
+
+  127 PTR_STMT: POINTER VAR EQ DIGIT1 . END
+
+    END  shift, and go to state 142
+
+
+State 101
+
+  128 PTR_STMT: POINTER VAR EQ DIGIT2 . END
+
+    END  shift, and go to state 143
+
+
+State 102
+
+  129 PTR_STMT: POINTER VAR EQ SQUOTE . END
+
+    END  shift, and go to state 144
+
+
+State 103
+
+  134 NEW_STMT: NEW $@47 DATA_TYPE VAR . END
+
+    END  shift, and go to state 145
+
+
+State 104
+
+   11 STATEMENT: DICT LT DATA_TYPE GT . VAR LB DIGIT1 RB END
+   12          | DICT LT DATA_TYPE GT . VAR LB DIGIT1 RB LB DIGIT1 RB END
+
+    VAR  shift, and go to state 146
+
+
+State 105
+
+  124 INL_STMT: INLFUNC . $@44 FUNC_STMT
+
+    $default  reduce using rule 123 ($@44)
+
+    $@44  go to state 147
+
+
+State 106
+
+    3 prm: PRM1 PRM2 $@1 STATEMENTS PRM3 $@2 AFTER .
+
+    $default  reduce using rule 3 (prm)
+
+
+State 107
+
+  122 FUNC_STMT: DATA_TYPE . VAR LB $@41 DEF_PARA RB CLN $@42 STATEMENTS RET $@43 A_EXPN END
+
+    VAR  shift, and go to state 148
+
+
+State 108
+
+    4 AFTER: FUNC_STMT . AFTER
+
+    VAR      shift, and go to state 65
+    INLFUNC  shift, and go to state 105
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    $default  reduce using rule 6 (AFTER)
+
+    AFTER      go to state 149
+    DATA_TYPE  go to state 107
+    FUNC_STMT  go to state 108
+    INL_STMT   go to state 109
+
+
+State 109
+
+    5 AFTER: INL_STMT . AFTER
+
+    VAR      shift, and go to state 65
+    INLFUNC  shift, and go to state 105
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    $default  reduce using rule 6 (AFTER)
+
+    AFTER      go to state 150
+    DATA_TYPE  go to state 107
+    FUNC_STMT  go to state 108
+    INL_STMT   go to state 109
+
+
+State 110
+
+   42 ELSEIF_STMT1: ELSEIF LB . $@13 A_EXPN RB CLN $@14 STATEMENTS
+
+    $default  reduce using rule 40 ($@13)
+
+    $@13  go to state 151
+
+
+State 111
+
+   44 ELSE_STMT: ELSE CLN . $@15 STATEMENTS
+
+    $default  reduce using rule 43 ($@15)
+
+    $@15  go to state 152
+
+
+State 112
+
+   57 VAR_LIST: VAR $@19 COMMA . VAR_LIST
+
+    VAR  shift, and go to state 48
+
+    VAR_LIST  go to state 153
+
+
+State 113
+
+  126 PTR_STMT: DATA_TYPE POINTER VAR EQ . AT VAR COMMA $@45 PTR_STMT1 END
+
+    AT  shift, and go to state 154
+
+
+State 114
+
+   66 A_EXPN: NOT LB . $@22 A_EXPN RB
+
+    $default  reduce using rule 65 ($@22)
+
+    $@22  go to state 155
+
+
+State 115
+
+   80 A_EXPN: A_EXPN ADD . $@29 A_EXPN
+
+    $default  reduce using rule 79 ($@29)
+
+    $@29  go to state 156
+
+
+State 116
+
+   82 A_EXPN: A_EXPN MIN . $@30 A_EXPN
+
+    $default  reduce using rule 81 ($@30)
+
+    $@30  go to state 157
+
+
+State 117
+
+   84 A_EXPN: A_EXPN MULT . $@31 A_EXPN
+
+    $default  reduce using rule 83 ($@31)
+
+    $@31  go to state 158
+
+
+State 118
+
+   86 A_EXPN: A_EXPN DIV . $@32 A_EXPN
+
+    $default  reduce using rule 85 ($@32)
+
+    $@32  go to state 159
+
+
+State 119
+
+   88 A_EXPN: A_EXPN MOD . $@33 A_EXPN
+
+    $default  reduce using rule 87 ($@33)
+
+    $@33  go to state 160
+
+
+State 120
+
+   68 A_EXPN: A_EXPN LT . $@23 A_EXPN
+
+    $default  reduce using rule 67 ($@23)
+
+    $@23  go to state 161
+
+
+State 121
+
+   70 A_EXPN: A_EXPN GT . $@24 A_EXPN
+
+    $default  reduce using rule 69 ($@24)
+
+    $@24  go to state 162
+
+
+State 122
+
+   72 A_EXPN: A_EXPN LE . $@25 A_EXPN
+
+    $default  reduce using rule 71 ($@25)
+
+    $@25  go to state 163
+
+
+State 123
+
+   74 A_EXPN: A_EXPN GE . $@26 A_EXPN
+
+    $default  reduce using rule 73 ($@26)
+
+    $@26  go to state 164
+
+
+State 124
+
+   76 A_EXPN: A_EXPN ET . $@27 A_EXPN
+
+    $default  reduce using rule 75 ($@27)
+
+    $@27  go to state 165
+
+
+State 125
+
+   78 A_EXPN: A_EXPN NE . $@28 A_EXPN
+
+    $default  reduce using rule 77 ($@28)
+
+    $@28  go to state 166
+
+
+State 126
+
+   62 A_EXPN: A_EXPN AND . $@20 A_EXPN
+
+    $default  reduce using rule 61 ($@20)
+
+    $@20  go to state 167
+
+
+State 127
+
+   64 A_EXPN: A_EXPN OR . $@21 A_EXPN
+
+    $default  reduce using rule 63 ($@21)
+
+    $@21  go to state 168
+
+
+State 128
+
+   37 IF_STMT: IF LB $@11 A_EXPN RB . CLN $@12 STATEMENTS
+
+    CLN  shift, and go to state 169
+
+
+State 129
+
+   47 WHILE_STMT: WHILE LB $@16 A_EXPN RB . CLN $@17 STATEMENTS
+
+    CLN  shift, and go to state 170
+
+
+State 130
+
+   26 STATEMENT: REPEAT $@5 STATEMENTS $@6 UNTIL . LB $@7 A_EXPN RB CLN
+
+    LB  shift, and go to state 171
+
+
+State 131
+
+   29 STATEMENT: FOR VAR FROM DIGIT1 TO . DIGIT1 BY DIGIT1 CLN $@8 STATEMENTS $@9 FOREND
+
+    DIGIT1  shift, and go to state 172
+
+
+State 132
+
+  135 CALL_PARA: CALL_PARA COMMA . VAR
+  136          | CALL_PARA COMMA . DIGIT1
+  137          | CALL_PARA COMMA . DIGIT2
+  138          | CALL_PARA COMMA . SQUOTE
+  139          | CALL_PARA COMMA . TRUE
+  140          | CALL_PARA COMMA . FALSE
+
+    DIGIT1  shift, and go to state 173
+    DIGIT2  shift, and go to state 174
+    TRUE    shift, and go to state 175
+    FALSE   shift, and go to state 176
+    VAR     shift, and go to state 177
+    SQUOTE  shift, and go to state 178
+
+
+State 133
+
+   32 STATEMENT: VAR LB $@10 CALL_PARA RB . END
+
+    END  shift, and go to state 179
+
+
+State 134
+
+   91 STR_EQ: LCB . SQUOTE $@34 STR_EQ1 RCB
+   93       | LCB . DIGIT1 $@35 STR_EQ1 RCB
+   95       | LCB . DIGIT2 $@36 STR_EQ1 RCB
+
+    DIGIT1  shift, and go to state 180
+    DIGIT2  shift, and go to state 181
+    SQUOTE  shift, and go to state 182
+
+
+State 135
+
+   15 STATEMENT: VAR $@3 EQ $@4 EQ_RHS . END
+
+    END  shift, and go to state 183
+
+
+State 136
+
+   59 EQ_RHS: A_EXPN .
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    $default  reduce using rule 59 (EQ_RHS)
+
+
+State 137
+
+   60 EQ_RHS: STR_EQ .
+
+    $default  reduce using rule 60 (EQ_RHS)
+
+
+State 138
+
+   49 READ_VAR_LIST: VAR $@18 COMMA . READ_VAR_LIST
+
+    VAR  shift, and go to state 58
+
+    READ_VAR_LIST  go to state 184
+
+
+State 139
+
+   10 STATEMENT: INP LB READ_VAR_LIST RB END .
+
+    $default  reduce using rule 10 (STATEMENT)
+
+
+State 140
+
+  115 OUT_STMT: VAR $@40 COMMA . VAR_MORE
+
+    VAR  shift, and go to state 185
+
+    VAR_MORE  go to state 186
+
+
+State 141
+
+   30 STATEMENT: OUT LB OUT_STMT RB END .
+
+    $default  reduce using rule 30 (STATEMENT)
+
+
+State 142
+
+  127 PTR_STMT: POINTER VAR EQ DIGIT1 END .
+
+    $default  reduce using rule 127 (PTR_STMT)
+
+
+State 143
+
+  128 PTR_STMT: POINTER VAR EQ DIGIT2 END .
+
+    $default  reduce using rule 128 (PTR_STMT)
+
+
+State 144
+
+  129 PTR_STMT: POINTER VAR EQ SQUOTE END .
+
+    $default  reduce using rule 129 (PTR_STMT)
+
+
+State 145
+
+  134 NEW_STMT: NEW $@47 DATA_TYPE VAR END .
+
+    $default  reduce using rule 134 (NEW_STMT)
+
+
+State 146
+
+   11 STATEMENT: DICT LT DATA_TYPE GT VAR . LB DIGIT1 RB END
+   12          | DICT LT DATA_TYPE GT VAR . LB DIGIT1 RB LB DIGIT1 RB END
+
+    LB  shift, and go to state 187
+
+
+State 147
+
+  124 INL_STMT: INLFUNC $@44 . FUNC_STMT
+
+    VAR     shift, and go to state 65
+    NUM1    shift, and go to state 19
+    NUM2    shift, and go to state 20
+    STRING  shift, and go to state 21
+    BOOL    shift, and go to state 22
+
+    DATA_TYPE  go to state 107
+    FUNC_STMT  go to state 188
+
+
+State 148
+
+  122 FUNC_STMT: DATA_TYPE VAR . LB $@41 DEF_PARA RB CLN $@42 STATEMENTS RET $@43 A_EXPN END
+
+    LB  shift, and go to state 189
+
+
+State 149
+
+    4 AFTER: FUNC_STMT AFTER .
+
+    $default  reduce using rule 4 (AFTER)
+
+
+State 150
+
+    5 AFTER: INL_STMT AFTER .
+
+    $default  reduce using rule 5 (AFTER)
+
+
+State 151
+
+   42 ELSEIF_STMT1: ELSEIF LB $@13 . A_EXPN RB CLN $@14 STATEMENTS
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 190
+    END_A_EXPN  go to state 84
+
+
+State 152
+
+   44 ELSE_STMT: ELSE CLN $@15 . STATEMENTS
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    STATEMENTS  go to state 191
+    STATEMENT   go to state 24
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 153
+
+   57 VAR_LIST: VAR $@19 COMMA VAR_LIST .
+
+    $default  reduce using rule 57 (VAR_LIST)
+
+
+State 154
+
+  126 PTR_STMT: DATA_TYPE POINTER VAR EQ AT . VAR COMMA $@45 PTR_STMT1 END
+
+    VAR  shift, and go to state 192
+
+
+State 155
+
+   66 A_EXPN: NOT LB $@22 . A_EXPN RB
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 193
+    END_A_EXPN  go to state 84
+
+
+State 156
+
+   80 A_EXPN: A_EXPN ADD $@29 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 194
+    END_A_EXPN  go to state 84
+
+
+State 157
+
+   82 A_EXPN: A_EXPN MIN $@30 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 195
+    END_A_EXPN  go to state 84
+
+
+State 158
+
+   84 A_EXPN: A_EXPN MULT $@31 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 196
+    END_A_EXPN  go to state 84
+
+
+State 159
+
+   86 A_EXPN: A_EXPN DIV $@32 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 197
+    END_A_EXPN  go to state 84
+
+
+State 160
+
+   88 A_EXPN: A_EXPN MOD $@33 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 198
+    END_A_EXPN  go to state 84
+
+
+State 161
+
+   68 A_EXPN: A_EXPN LT $@23 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 199
+    END_A_EXPN  go to state 84
+
+
+State 162
+
+   70 A_EXPN: A_EXPN GT $@24 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 200
+    END_A_EXPN  go to state 84
+
+
+State 163
+
+   72 A_EXPN: A_EXPN LE $@25 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 201
+    END_A_EXPN  go to state 84
+
+
+State 164
+
+   74 A_EXPN: A_EXPN GE $@26 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 202
+    END_A_EXPN  go to state 84
+
+
+State 165
+
+   76 A_EXPN: A_EXPN ET $@27 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 203
+    END_A_EXPN  go to state 84
+
+
+State 166
+
+   78 A_EXPN: A_EXPN NE $@28 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 204
+    END_A_EXPN  go to state 84
+
+
+State 167
+
+   62 A_EXPN: A_EXPN AND $@20 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 205
+    END_A_EXPN  go to state 84
+
+
+State 168
+
+   64 A_EXPN: A_EXPN OR $@21 . A_EXPN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 206
+    END_A_EXPN  go to state 84
+
+
+State 169
+
+   37 IF_STMT: IF LB $@11 A_EXPN RB CLN . $@12 STATEMENTS
+
+    $default  reduce using rule 36 ($@12)
+
+    $@12  go to state 207
+
+
+State 170
+
+   47 WHILE_STMT: WHILE LB $@16 A_EXPN RB CLN . $@17 STATEMENTS
+
+    $default  reduce using rule 46 ($@17)
+
+    $@17  go to state 208
+
+
+State 171
+
+   26 STATEMENT: REPEAT $@5 STATEMENTS $@6 UNTIL LB . $@7 A_EXPN RB CLN
+
+    $default  reduce using rule 25 ($@7)
+
+    $@7  go to state 209
+
+
+State 172
+
+   29 STATEMENT: FOR VAR FROM DIGIT1 TO DIGIT1 . BY DIGIT1 CLN $@8 STATEMENTS $@9 FOREND
+
+    BY  shift, and go to state 210
+
+
+State 173
+
+  136 CALL_PARA: CALL_PARA COMMA DIGIT1 .
+
+    $default  reduce using rule 136 (CALL_PARA)
+
+
+State 174
+
+  137 CALL_PARA: CALL_PARA COMMA DIGIT2 .
+
+    $default  reduce using rule 137 (CALL_PARA)
+
+
+State 175
+
+  139 CALL_PARA: CALL_PARA COMMA TRUE .
+
+    $default  reduce using rule 139 (CALL_PARA)
+
+
+State 176
+
+  140 CALL_PARA: CALL_PARA COMMA FALSE .
+
+    $default  reduce using rule 140 (CALL_PARA)
+
+
+State 177
+
+  135 CALL_PARA: CALL_PARA COMMA VAR .
+
+    $default  reduce using rule 135 (CALL_PARA)
+
+
+State 178
+
+  138 CALL_PARA: CALL_PARA COMMA SQUOTE .
+
+    $default  reduce using rule 138 (CALL_PARA)
+
+
+State 179
+
+   32 STATEMENT: VAR LB $@10 CALL_PARA RB END .
+
+    $default  reduce using rule 32 (STATEMENT)
+
+
+State 180
+
+   93 STR_EQ: LCB DIGIT1 . $@35 STR_EQ1 RCB
+
+    $default  reduce using rule 92 ($@35)
+
+    $@35  go to state 211
+
+
+State 181
+
+   95 STR_EQ: LCB DIGIT2 . $@36 STR_EQ1 RCB
+
+    $default  reduce using rule 94 ($@36)
+
+    $@36  go to state 212
+
+
+State 182
+
+   91 STR_EQ: LCB SQUOTE . $@34 STR_EQ1 RCB
+
+    $default  reduce using rule 90 ($@34)
+
+    $@34  go to state 213
+
+
+State 183
+
+   15 STATEMENT: VAR $@3 EQ $@4 EQ_RHS END .
+
+    $default  reduce using rule 15 (STATEMENT)
+
+
+State 184
+
+   49 READ_VAR_LIST: VAR $@18 COMMA READ_VAR_LIST .
+
+    $default  reduce using rule 49 (READ_VAR_LIST)
+
+
+State 185
+
+  118 VAR_MORE: VAR .
+
+    $default  reduce using rule 118 (VAR_MORE)
+
+
+State 186
+
+  115 OUT_STMT: VAR $@40 COMMA VAR_MORE .
+
+    $default  reduce using rule 115 (OUT_STMT)
+
+
+State 187
+
+   11 STATEMENT: DICT LT DATA_TYPE GT VAR LB . DIGIT1 RB END
+   12          | DICT LT DATA_TYPE GT VAR LB . DIGIT1 RB LB DIGIT1 RB END
+
+    DIGIT1  shift, and go to state 214
+
+
+State 188
+
+  124 INL_STMT: INLFUNC $@44 FUNC_STMT .
+
+    $default  reduce using rule 124 (INL_STMT)
+
+
+State 189
+
+  122 FUNC_STMT: DATA_TYPE VAR LB . $@41 DEF_PARA RB CLN $@42 STATEMENTS RET $@43 A_EXPN END
+
+    $default  reduce using rule 119 ($@41)
+
+    $@41  go to state 215
+
+
+State 190
+
+   42 ELSEIF_STMT1: ELSEIF LB $@13 A_EXPN . RB CLN $@14 STATEMENTS
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+    RB    shift, and go to state 216
+
+
+State 191
+
+    7 STATEMENTS: STATEMENTS . STATEMENT
+   44 ELSE_STMT: ELSE CLN $@15 STATEMENTS .
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    SLC       [reduce using rule 44 (ELSE_STMT)]
+    MLC       [reduce using rule 44 (ELSE_STMT)]
+    IF        [reduce using rule 44 (ELSE_STMT)]
+    GOTO      [reduce using rule 44 (ELSE_STMT)]
+    WHILE     [reduce using rule 44 (ELSE_STMT)]
+    REPEAT    [reduce using rule 44 (ELSE_STMT)]
+    FOR       [reduce using rule 44 (ELSE_STMT)]
+    VAR       [reduce using rule 44 (ELSE_STMT)]
+    INP       [reduce using rule 44 (ELSE_STMT)]
+    OUT       [reduce using rule 44 (ELSE_STMT)]
+    POINTER   [reduce using rule 44 (ELSE_STMT)]
+    NEW       [reduce using rule 44 (ELSE_STMT)]
+    DICT      [reduce using rule 44 (ELSE_STMT)]
+    NUM1      [reduce using rule 44 (ELSE_STMT)]
+    NUM2      [reduce using rule 44 (ELSE_STMT)]
+    STRING    [reduce using rule 44 (ELSE_STMT)]
+    BOOL      [reduce using rule 44 (ELSE_STMT)]
+    $default  reduce using rule 44 (ELSE_STMT)
+
+    STATEMENT   go to state 44
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 192
+
+  126 PTR_STMT: DATA_TYPE POINTER VAR EQ AT VAR . COMMA $@45 PTR_STMT1 END
+
+    COMMA  shift, and go to state 217
+
+
+State 193
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   66       | NOT LB $@22 A_EXPN . RB
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+    RB    shift, and go to state 218
+
+
+State 194
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   80       | A_EXPN ADD $@29 A_EXPN .
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 80 (A_EXPN)]
+    MIN       [reduce using rule 80 (A_EXPN)]
+    MULT      [reduce using rule 80 (A_EXPN)]
+    DIV       [reduce using rule 80 (A_EXPN)]
+    MOD       [reduce using rule 80 (A_EXPN)]
+    LT        [reduce using rule 80 (A_EXPN)]
+    GT        [reduce using rule 80 (A_EXPN)]
+    LE        [reduce using rule 80 (A_EXPN)]
+    GE        [reduce using rule 80 (A_EXPN)]
+    ET        [reduce using rule 80 (A_EXPN)]
+    NE        [reduce using rule 80 (A_EXPN)]
+    AND       [reduce using rule 80 (A_EXPN)]
+    OR        [reduce using rule 80 (A_EXPN)]
+    $default  reduce using rule 80 (A_EXPN)
+
+
+State 195
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   82       | A_EXPN MIN $@30 A_EXPN .
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 82 (A_EXPN)]
+    MIN       [reduce using rule 82 (A_EXPN)]
+    MULT      [reduce using rule 82 (A_EXPN)]
+    DIV       [reduce using rule 82 (A_EXPN)]
+    MOD       [reduce using rule 82 (A_EXPN)]
+    LT        [reduce using rule 82 (A_EXPN)]
+    GT        [reduce using rule 82 (A_EXPN)]
+    LE        [reduce using rule 82 (A_EXPN)]
+    GE        [reduce using rule 82 (A_EXPN)]
+    ET        [reduce using rule 82 (A_EXPN)]
+    NE        [reduce using rule 82 (A_EXPN)]
+    AND       [reduce using rule 82 (A_EXPN)]
+    OR        [reduce using rule 82 (A_EXPN)]
+    $default  reduce using rule 82 (A_EXPN)
+
+
+State 196
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   84       | A_EXPN MULT $@31 A_EXPN .
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 84 (A_EXPN)]
+    MIN       [reduce using rule 84 (A_EXPN)]
+    MULT      [reduce using rule 84 (A_EXPN)]
+    DIV       [reduce using rule 84 (A_EXPN)]
+    MOD       [reduce using rule 84 (A_EXPN)]
+    LT        [reduce using rule 84 (A_EXPN)]
+    GT        [reduce using rule 84 (A_EXPN)]
+    LE        [reduce using rule 84 (A_EXPN)]
+    GE        [reduce using rule 84 (A_EXPN)]
+    ET        [reduce using rule 84 (A_EXPN)]
+    NE        [reduce using rule 84 (A_EXPN)]
+    AND       [reduce using rule 84 (A_EXPN)]
+    OR        [reduce using rule 84 (A_EXPN)]
+    $default  reduce using rule 84 (A_EXPN)
+
+
+State 197
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   86       | A_EXPN DIV $@32 A_EXPN .
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 86 (A_EXPN)]
+    MIN       [reduce using rule 86 (A_EXPN)]
+    MULT      [reduce using rule 86 (A_EXPN)]
+    DIV       [reduce using rule 86 (A_EXPN)]
+    MOD       [reduce using rule 86 (A_EXPN)]
+    LT        [reduce using rule 86 (A_EXPN)]
+    GT        [reduce using rule 86 (A_EXPN)]
+    LE        [reduce using rule 86 (A_EXPN)]
+    GE        [reduce using rule 86 (A_EXPN)]
+    ET        [reduce using rule 86 (A_EXPN)]
+    NE        [reduce using rule 86 (A_EXPN)]
+    AND       [reduce using rule 86 (A_EXPN)]
+    OR        [reduce using rule 86 (A_EXPN)]
+    $default  reduce using rule 86 (A_EXPN)
+
+
+State 198
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+   88       | A_EXPN MOD $@33 A_EXPN .
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 88 (A_EXPN)]
+    MIN       [reduce using rule 88 (A_EXPN)]
+    MULT      [reduce using rule 88 (A_EXPN)]
+    DIV       [reduce using rule 88 (A_EXPN)]
+    MOD       [reduce using rule 88 (A_EXPN)]
+    LT        [reduce using rule 88 (A_EXPN)]
+    GT        [reduce using rule 88 (A_EXPN)]
+    LE        [reduce using rule 88 (A_EXPN)]
+    GE        [reduce using rule 88 (A_EXPN)]
+    ET        [reduce using rule 88 (A_EXPN)]
+    NE        [reduce using rule 88 (A_EXPN)]
+    AND       [reduce using rule 88 (A_EXPN)]
+    OR        [reduce using rule 88 (A_EXPN)]
+    $default  reduce using rule 88 (A_EXPN)
+
+
+State 199
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   68       | A_EXPN LT $@23 A_EXPN .
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 68 (A_EXPN)]
+    MIN       [reduce using rule 68 (A_EXPN)]
+    MULT      [reduce using rule 68 (A_EXPN)]
+    DIV       [reduce using rule 68 (A_EXPN)]
+    MOD       [reduce using rule 68 (A_EXPN)]
+    LT        [reduce using rule 68 (A_EXPN)]
+    GT        [reduce using rule 68 (A_EXPN)]
+    LE        [reduce using rule 68 (A_EXPN)]
+    GE        [reduce using rule 68 (A_EXPN)]
+    ET        [reduce using rule 68 (A_EXPN)]
+    NE        [reduce using rule 68 (A_EXPN)]
+    AND       [reduce using rule 68 (A_EXPN)]
+    OR        [reduce using rule 68 (A_EXPN)]
+    $default  reduce using rule 68 (A_EXPN)
+
+
+State 200
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   70       | A_EXPN GT $@24 A_EXPN .
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 70 (A_EXPN)]
+    MIN       [reduce using rule 70 (A_EXPN)]
+    MULT      [reduce using rule 70 (A_EXPN)]
+    DIV       [reduce using rule 70 (A_EXPN)]
+    MOD       [reduce using rule 70 (A_EXPN)]
+    LT        [reduce using rule 70 (A_EXPN)]
+    GT        [reduce using rule 70 (A_EXPN)]
+    LE        [reduce using rule 70 (A_EXPN)]
+    GE        [reduce using rule 70 (A_EXPN)]
+    ET        [reduce using rule 70 (A_EXPN)]
+    NE        [reduce using rule 70 (A_EXPN)]
+    AND       [reduce using rule 70 (A_EXPN)]
+    OR        [reduce using rule 70 (A_EXPN)]
+    $default  reduce using rule 70 (A_EXPN)
+
+
+State 201
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   72       | A_EXPN LE $@25 A_EXPN .
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 72 (A_EXPN)]
+    MIN       [reduce using rule 72 (A_EXPN)]
+    MULT      [reduce using rule 72 (A_EXPN)]
+    DIV       [reduce using rule 72 (A_EXPN)]
+    MOD       [reduce using rule 72 (A_EXPN)]
+    LT        [reduce using rule 72 (A_EXPN)]
+    GT        [reduce using rule 72 (A_EXPN)]
+    LE        [reduce using rule 72 (A_EXPN)]
+    GE        [reduce using rule 72 (A_EXPN)]
+    ET        [reduce using rule 72 (A_EXPN)]
+    NE        [reduce using rule 72 (A_EXPN)]
+    AND       [reduce using rule 72 (A_EXPN)]
+    OR        [reduce using rule 72 (A_EXPN)]
+    $default  reduce using rule 72 (A_EXPN)
+
+
+State 202
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   74       | A_EXPN GE $@26 A_EXPN .
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 74 (A_EXPN)]
+    MIN       [reduce using rule 74 (A_EXPN)]
+    MULT      [reduce using rule 74 (A_EXPN)]
+    DIV       [reduce using rule 74 (A_EXPN)]
+    MOD       [reduce using rule 74 (A_EXPN)]
+    LT        [reduce using rule 74 (A_EXPN)]
+    GT        [reduce using rule 74 (A_EXPN)]
+    LE        [reduce using rule 74 (A_EXPN)]
+    GE        [reduce using rule 74 (A_EXPN)]
+    ET        [reduce using rule 74 (A_EXPN)]
+    NE        [reduce using rule 74 (A_EXPN)]
+    AND       [reduce using rule 74 (A_EXPN)]
+    OR        [reduce using rule 74 (A_EXPN)]
+    $default  reduce using rule 74 (A_EXPN)
+
+
+State 203
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   76       | A_EXPN ET $@27 A_EXPN .
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 76 (A_EXPN)]
+    MIN       [reduce using rule 76 (A_EXPN)]
+    MULT      [reduce using rule 76 (A_EXPN)]
+    DIV       [reduce using rule 76 (A_EXPN)]
+    MOD       [reduce using rule 76 (A_EXPN)]
+    LT        [reduce using rule 76 (A_EXPN)]
+    GT        [reduce using rule 76 (A_EXPN)]
+    LE        [reduce using rule 76 (A_EXPN)]
+    GE        [reduce using rule 76 (A_EXPN)]
+    ET        [reduce using rule 76 (A_EXPN)]
+    NE        [reduce using rule 76 (A_EXPN)]
+    AND       [reduce using rule 76 (A_EXPN)]
+    OR        [reduce using rule 76 (A_EXPN)]
+    $default  reduce using rule 76 (A_EXPN)
+
+
+State 204
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   78       | A_EXPN NE $@28 A_EXPN .
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 78 (A_EXPN)]
+    MIN       [reduce using rule 78 (A_EXPN)]
+    MULT      [reduce using rule 78 (A_EXPN)]
+    DIV       [reduce using rule 78 (A_EXPN)]
+    MOD       [reduce using rule 78 (A_EXPN)]
+    LT        [reduce using rule 78 (A_EXPN)]
+    GT        [reduce using rule 78 (A_EXPN)]
+    LE        [reduce using rule 78 (A_EXPN)]
+    GE        [reduce using rule 78 (A_EXPN)]
+    ET        [reduce using rule 78 (A_EXPN)]
+    NE        [reduce using rule 78 (A_EXPN)]
+    AND       [reduce using rule 78 (A_EXPN)]
+    OR        [reduce using rule 78 (A_EXPN)]
+    $default  reduce using rule 78 (A_EXPN)
+
+
+State 205
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   62       | A_EXPN AND $@20 A_EXPN .
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 62 (A_EXPN)]
+    MIN       [reduce using rule 62 (A_EXPN)]
+    MULT      [reduce using rule 62 (A_EXPN)]
+    DIV       [reduce using rule 62 (A_EXPN)]
+    MOD       [reduce using rule 62 (A_EXPN)]
+    LT        [reduce using rule 62 (A_EXPN)]
+    GT        [reduce using rule 62 (A_EXPN)]
+    LE        [reduce using rule 62 (A_EXPN)]
+    GE        [reduce using rule 62 (A_EXPN)]
+    ET        [reduce using rule 62 (A_EXPN)]
+    NE        [reduce using rule 62 (A_EXPN)]
+    AND       [reduce using rule 62 (A_EXPN)]
+    OR        [reduce using rule 62 (A_EXPN)]
+    $default  reduce using rule 62 (A_EXPN)
+
+
+State 206
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   64       | A_EXPN OR $@21 A_EXPN .
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+    ADD       [reduce using rule 64 (A_EXPN)]
+    MIN       [reduce using rule 64 (A_EXPN)]
+    MULT      [reduce using rule 64 (A_EXPN)]
+    DIV       [reduce using rule 64 (A_EXPN)]
+    MOD       [reduce using rule 64 (A_EXPN)]
+    LT        [reduce using rule 64 (A_EXPN)]
+    GT        [reduce using rule 64 (A_EXPN)]
+    LE        [reduce using rule 64 (A_EXPN)]
+    GE        [reduce using rule 64 (A_EXPN)]
+    ET        [reduce using rule 64 (A_EXPN)]
+    NE        [reduce using rule 64 (A_EXPN)]
+    AND       [reduce using rule 64 (A_EXPN)]
+    OR        [reduce using rule 64 (A_EXPN)]
+    $default  reduce using rule 64 (A_EXPN)
+
+
+State 207
+
+   37 IF_STMT: IF LB $@11 A_EXPN RB CLN $@12 . STATEMENTS
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    STATEMENTS  go to state 219
+    STATEMENT   go to state 24
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 208
+
+   47 WHILE_STMT: WHILE LB $@16 A_EXPN RB CLN $@17 . STATEMENTS
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    STATEMENTS  go to state 220
+    STATEMENT   go to state 24
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 209
+
+   26 STATEMENT: REPEAT $@5 STATEMENTS $@6 UNTIL LB $@7 . A_EXPN RB CLN
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 221
+    END_A_EXPN  go to state 84
+
+
+State 210
+
+   29 STATEMENT: FOR VAR FROM DIGIT1 TO DIGIT1 BY . DIGIT1 CLN $@8 STATEMENTS $@9 FOREND
+
+    DIGIT1  shift, and go to state 222
+
+
+State 211
+
+   93 STR_EQ: LCB DIGIT1 $@35 . STR_EQ1 RCB
+
+    COMMA  shift, and go to state 223
+    CLN    shift, and go to state 224
+
+    $default  reduce using rule 97 (STR_EQ2)
+
+    STR_EQ1  go to state 225
+    STR_EQ2  go to state 226
+    STR_EQ3  go to state 227
+
+
+State 212
+
+   95 STR_EQ: LCB DIGIT2 $@36 . STR_EQ1 RCB
+
+    COMMA  shift, and go to state 223
+    CLN    shift, and go to state 224
+
+    $default  reduce using rule 97 (STR_EQ2)
+
+    STR_EQ1  go to state 228
+    STR_EQ2  go to state 226
+    STR_EQ3  go to state 227
+
+
+State 213
+
+   91 STR_EQ: LCB SQUOTE $@34 . STR_EQ1 RCB
+
+    COMMA  shift, and go to state 223
+    CLN    shift, and go to state 224
+
+    $default  reduce using rule 97 (STR_EQ2)
+
+    STR_EQ1  go to state 229
+    STR_EQ2  go to state 226
+    STR_EQ3  go to state 227
+
+
+State 214
+
+   11 STATEMENT: DICT LT DATA_TYPE GT VAR LB DIGIT1 . RB END
+   12          | DICT LT DATA_TYPE GT VAR LB DIGIT1 . RB LB DIGIT1 RB END
+
+    RB  shift, and go to state 230
+
+
+State 215
+
+  122 FUNC_STMT: DATA_TYPE VAR LB $@41 . DEF_PARA RB CLN $@42 STATEMENTS RET $@43 A_EXPN END
+
+    VAR     shift, and go to state 65
+    NUM1    shift, and go to state 19
+    NUM2    shift, and go to state 20
+    STRING  shift, and go to state 21
+    BOOL    shift, and go to state 22
+
+    $default  reduce using rule 151 (DEF_PARA)
+
+    DATA_TYPE  go to state 231
+    DEF_PARA   go to state 232
+
+
+State 216
+
+   42 ELSEIF_STMT1: ELSEIF LB $@13 A_EXPN RB . CLN $@14 STATEMENTS
+
+    CLN  shift, and go to state 233
+
+
+State 217
+
+  126 PTR_STMT: DATA_TYPE POINTER VAR EQ AT VAR COMMA . $@45 PTR_STMT1 END
+
+    $default  reduce using rule 125 ($@45)
+
+    $@45  go to state 234
+
+
+State 218
+
+   66 A_EXPN: NOT LB $@22 A_EXPN RB .
+
+    $default  reduce using rule 66 (A_EXPN)
+
+
+State 219
+
+    7 STATEMENTS: STATEMENTS . STATEMENT
+   37 IF_STMT: IF LB $@11 A_EXPN RB CLN $@12 STATEMENTS .
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    $default  reduce using rule 37 (IF_STMT)
+
+    STATEMENT   go to state 44
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 220
+
+    7 STATEMENTS: STATEMENTS . STATEMENT
+   47 WHILE_STMT: WHILE LB $@16 A_EXPN RB CLN $@17 STATEMENTS .
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    $default  reduce using rule 47 (WHILE_STMT)
+
+    STATEMENT   go to state 44
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 221
+
+   26 STATEMENT: REPEAT $@5 STATEMENTS $@6 UNTIL LB $@7 A_EXPN . RB CLN
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+    RB    shift, and go to state 235
+
+
+State 222
+
+   29 STATEMENT: FOR VAR FROM DIGIT1 TO DIGIT1 BY DIGIT1 . CLN $@8 STATEMENTS $@9 FOREND
+
+    CLN  shift, and go to state 236
+
+
+State 223
+
+   99 STR_EQ3: COMMA .
+
+    $default  reduce using rule 99 (STR_EQ3)
+
+
+State 224
+
+  100 STR_EQ3: CLN .
+
+    $default  reduce using rule 100 (STR_EQ3)
+
+
+State 225
+
+   93 STR_EQ: LCB DIGIT1 $@35 STR_EQ1 . RCB
+
+    RCB  shift, and go to state 237
+
+
+State 226
+
+   96 STR_EQ1: STR_EQ2 . STR_EQ4
+
+    DIGIT1  shift, and go to state 238
+    DIGIT2  shift, and go to state 239
+    SQUOTE  shift, and go to state 240
+
+    $default  reduce using rule 107 (STR_EQ4)
+
+    STR_EQ4  go to state 241
+
+
+State 227
+
+   98 STR_EQ2: STR_EQ3 .
+
+    $default  reduce using rule 98 (STR_EQ2)
+
+
+State 228
+
+   95 STR_EQ: LCB DIGIT2 $@36 STR_EQ1 . RCB
+
+    RCB  shift, and go to state 242
+
+
+State 229
+
+   91 STR_EQ: LCB SQUOTE $@34 STR_EQ1 . RCB
+
+    RCB  shift, and go to state 243
+
+
+State 230
+
+   11 STATEMENT: DICT LT DATA_TYPE GT VAR LB DIGIT1 RB . END
+   12          | DICT LT DATA_TYPE GT VAR LB DIGIT1 RB . LB DIGIT1 RB END
+
+    END  shift, and go to state 244
+    LB   shift, and go to state 245
+
+
+State 231
+
+  149 DEF_PARA: DATA_TYPE . VAR COMMA $@48 DEF_PARA
+  150         | DATA_TYPE . VAR
+
+    VAR  shift, and go to state 246
+
+
+State 232
+
+  122 FUNC_STMT: DATA_TYPE VAR LB $@41 DEF_PARA . RB CLN $@42 STATEMENTS RET $@43 A_EXPN END
+
+    RB  shift, and go to state 247
+
+
+State 233
+
+   42 ELSEIF_STMT1: ELSEIF LB $@13 A_EXPN RB CLN . $@14 STATEMENTS
+
+    $default  reduce using rule 41 ($@14)
+
+    $@14  go to state 248
+
+
+State 234
+
+  126 PTR_STMT: DATA_TYPE POINTER VAR EQ AT VAR COMMA $@45 . PTR_STMT1 END
+
+    VAR  shift, and go to state 249
+
+    PTR_STMT1  go to state 250
+
+
+State 235
+
+   26 STATEMENT: REPEAT $@5 STATEMENTS $@6 UNTIL LB $@7 A_EXPN RB . CLN
+
+    CLN  shift, and go to state 251
+
+
+State 236
+
+   29 STATEMENT: FOR VAR FROM DIGIT1 TO DIGIT1 BY DIGIT1 CLN . $@8 STATEMENTS $@9 FOREND
+
+    $default  reduce using rule 27 ($@8)
+
+    $@8  go to state 252
+
+
+State 237
+
+   93 STR_EQ: LCB DIGIT1 $@35 STR_EQ1 RCB .
+
+    $default  reduce using rule 93 (STR_EQ)
+
+
+State 238
+
+  104 STR_EQ4: DIGIT1 . $@38 STR_EQ1
+
+    $default  reduce using rule 103 ($@38)
+
+    $@38  go to state 253
+
+
+State 239
+
+  106 STR_EQ4: DIGIT2 . $@39 STR_EQ1
+
+    $default  reduce using rule 105 ($@39)
+
+    $@39  go to state 254
+
+
+State 240
+
+  102 STR_EQ4: SQUOTE . $@37 STR_EQ1
+
+    $default  reduce using rule 101 ($@37)
+
+    $@37  go to state 255
+
+
+State 241
+
+   96 STR_EQ1: STR_EQ2 STR_EQ4 .
+
+    $default  reduce using rule 96 (STR_EQ1)
+
+
+State 242
+
+   95 STR_EQ: LCB DIGIT2 $@36 STR_EQ1 RCB .
+
+    $default  reduce using rule 95 (STR_EQ)
+
+
+State 243
+
+   91 STR_EQ: LCB SQUOTE $@34 STR_EQ1 RCB .
+
+    $default  reduce using rule 91 (STR_EQ)
+
+
+State 244
+
+   11 STATEMENT: DICT LT DATA_TYPE GT VAR LB DIGIT1 RB END .
+
+    $default  reduce using rule 11 (STATEMENT)
+
+
+State 245
+
+   12 STATEMENT: DICT LT DATA_TYPE GT VAR LB DIGIT1 RB LB . DIGIT1 RB END
+
+    DIGIT1  shift, and go to state 256
+
+
+State 246
+
+  149 DEF_PARA: DATA_TYPE VAR . COMMA $@48 DEF_PARA
+  150         | DATA_TYPE VAR .
+
+    COMMA  shift, and go to state 257
+
+    $default  reduce using rule 150 (DEF_PARA)
+
+
+State 247
+
+  122 FUNC_STMT: DATA_TYPE VAR LB $@41 DEF_PARA RB . CLN $@42 STATEMENTS RET $@43 A_EXPN END
+
+    CLN  shift, and go to state 258
+
+
+State 248
+
+   42 ELSEIF_STMT1: ELSEIF LB $@13 A_EXPN RB CLN $@14 . STATEMENTS
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    STATEMENTS  go to state 259
+    STATEMENT   go to state 24
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 249
+
+  131 PTR_STMT1: VAR . EQ AT VAR COMMA $@46 PTR_STMT1
+  132          | VAR . EQ AT VAR
+
+    EQ  shift, and go to state 260
+
+
+State 250
+
+  126 PTR_STMT: DATA_TYPE POINTER VAR EQ AT VAR COMMA $@45 PTR_STMT1 . END
+
+    END  shift, and go to state 261
+
+
+State 251
+
+   26 STATEMENT: REPEAT $@5 STATEMENTS $@6 UNTIL LB $@7 A_EXPN RB CLN .
+
+    $default  reduce using rule 26 (STATEMENT)
+
+
+State 252
+
+   29 STATEMENT: FOR VAR FROM DIGIT1 TO DIGIT1 BY DIGIT1 CLN $@8 . STATEMENTS $@9 FOREND
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    STATEMENTS  go to state 262
+    STATEMENT   go to state 24
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 253
+
+  104 STR_EQ4: DIGIT1 $@38 . STR_EQ1
+
+    COMMA  shift, and go to state 223
+    CLN    shift, and go to state 224
+
+    $default  reduce using rule 97 (STR_EQ2)
+
+    STR_EQ1  go to state 263
+    STR_EQ2  go to state 226
+    STR_EQ3  go to state 227
+
+
+State 254
+
+  106 STR_EQ4: DIGIT2 $@39 . STR_EQ1
+
+    COMMA  shift, and go to state 223
+    CLN    shift, and go to state 224
+
+    $default  reduce using rule 97 (STR_EQ2)
+
+    STR_EQ1  go to state 264
+    STR_EQ2  go to state 226
+    STR_EQ3  go to state 227
+
+
+State 255
+
+  102 STR_EQ4: SQUOTE $@37 . STR_EQ1
+
+    COMMA  shift, and go to state 223
+    CLN    shift, and go to state 224
+
+    $default  reduce using rule 97 (STR_EQ2)
+
+    STR_EQ1  go to state 265
+    STR_EQ2  go to state 226
+    STR_EQ3  go to state 227
+
+
+State 256
+
+   12 STATEMENT: DICT LT DATA_TYPE GT VAR LB DIGIT1 RB LB DIGIT1 . RB END
+
+    RB  shift, and go to state 266
+
+
+State 257
+
+  149 DEF_PARA: DATA_TYPE VAR COMMA . $@48 DEF_PARA
+
+    $default  reduce using rule 148 ($@48)
+
+    $@48  go to state 267
+
+
+State 258
+
+  122 FUNC_STMT: DATA_TYPE VAR LB $@41 DEF_PARA RB CLN . $@42 STATEMENTS RET $@43 A_EXPN END
+
+    $default  reduce using rule 120 ($@42)
+
+    $@42  go to state 268
+
+
+State 259
+
+    7 STATEMENTS: STATEMENTS . STATEMENT
+   42 ELSEIF_STMT1: ELSEIF LB $@13 A_EXPN RB CLN $@14 STATEMENTS .
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    $default  reduce using rule 42 (ELSEIF_STMT1)
+
+    STATEMENT   go to state 44
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 260
+
+  131 PTR_STMT1: VAR EQ . AT VAR COMMA $@46 PTR_STMT1
+  132          | VAR EQ . AT VAR
+
+    AT  shift, and go to state 269
+
+
+State 261
+
+  126 PTR_STMT: DATA_TYPE POINTER VAR EQ AT VAR COMMA $@45 PTR_STMT1 END .
+
+    $default  reduce using rule 126 (PTR_STMT)
+
+
+State 262
+
+    7 STATEMENTS: STATEMENTS . STATEMENT
+   29 STATEMENT: FOR VAR FROM DIGIT1 TO DIGIT1 BY DIGIT1 CLN $@8 STATEMENTS . $@9 FOREND
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    $default  reduce using rule 28 ($@9)
+
+    STATEMENT   go to state 44
+    $@9         go to state 270
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 263
+
+  104 STR_EQ4: DIGIT1 $@38 STR_EQ1 .
+
+    $default  reduce using rule 104 (STR_EQ4)
+
+
+State 264
+
+  106 STR_EQ4: DIGIT2 $@39 STR_EQ1 .
+
+    $default  reduce using rule 106 (STR_EQ4)
+
+
+State 265
+
+  102 STR_EQ4: SQUOTE $@37 STR_EQ1 .
+
+    $default  reduce using rule 102 (STR_EQ4)
+
+
+State 266
+
+   12 STATEMENT: DICT LT DATA_TYPE GT VAR LB DIGIT1 RB LB DIGIT1 RB . END
+
+    END  shift, and go to state 271
+
+
+State 267
+
+  149 DEF_PARA: DATA_TYPE VAR COMMA $@48 . DEF_PARA
+
+    VAR     shift, and go to state 65
+    NUM1    shift, and go to state 19
+    NUM2    shift, and go to state 20
+    STRING  shift, and go to state 21
+    BOOL    shift, and go to state 22
+
+    $default  reduce using rule 151 (DEF_PARA)
+
+    DATA_TYPE  go to state 231
+    DEF_PARA   go to state 272
+
+
+State 268
+
+  122 FUNC_STMT: DATA_TYPE VAR LB $@41 DEF_PARA RB CLN $@42 . STATEMENTS RET $@43 A_EXPN END
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    STATEMENTS  go to state 273
+    STATEMENT   go to state 24
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 269
+
+  131 PTR_STMT1: VAR EQ AT . VAR COMMA $@46 PTR_STMT1
+  132          | VAR EQ AT . VAR
+
+    VAR  shift, and go to state 274
+
+
+State 270
+
+   29 STATEMENT: FOR VAR FROM DIGIT1 TO DIGIT1 BY DIGIT1 CLN $@8 STATEMENTS $@9 . FOREND
+
+    FOREND  shift, and go to state 275
+
+
+State 271
+
+   12 STATEMENT: DICT LT DATA_TYPE GT VAR LB DIGIT1 RB LB DIGIT1 RB END .
+
+    $default  reduce using rule 12 (STATEMENT)
+
+
+State 272
+
+  149 DEF_PARA: DATA_TYPE VAR COMMA $@48 DEF_PARA .
+
+    $default  reduce using rule 149 (DEF_PARA)
+
+
+State 273
+
+    7 STATEMENTS: STATEMENTS . STATEMENT
+  122 FUNC_STMT: DATA_TYPE VAR LB $@41 DEF_PARA RB CLN $@42 STATEMENTS . RET $@43 A_EXPN END
+
+    SLC      shift, and go to state 6
+    MLC      shift, and go to state 7
+    IF       shift, and go to state 8
+    GOTO     shift, and go to state 9
+    WHILE    shift, and go to state 10
+    REPEAT   shift, and go to state 11
+    FOR      shift, and go to state 12
+    VAR      shift, and go to state 13
+    INP      shift, and go to state 14
+    OUT      shift, and go to state 15
+    RET      shift, and go to state 276
+    POINTER  shift, and go to state 16
+    NEW      shift, and go to state 17
+    DICT     shift, and go to state 18
+    NUM1     shift, and go to state 19
+    NUM2     shift, and go to state 20
+    STRING   shift, and go to state 21
+    BOOL     shift, and go to state 22
+
+    STATEMENT   go to state 44
+    IF_STMT     go to state 25
+    WHILE_STMT  go to state 26
+    DATA_TYPE   go to state 27
+    PTR_STMT    go to state 28
+    NEW_STMT    go to state 29
+
+
+State 274
+
+  131 PTR_STMT1: VAR EQ AT VAR . COMMA $@46 PTR_STMT1
+  132          | VAR EQ AT VAR .
+
+    COMMA  shift, and go to state 277
+
+    $default  reduce using rule 132 (PTR_STMT1)
+
+
+State 275
+
+   29 STATEMENT: FOR VAR FROM DIGIT1 TO DIGIT1 BY DIGIT1 CLN $@8 STATEMENTS $@9 FOREND .
+
+    $default  reduce using rule 29 (STATEMENT)
+
+
+State 276
+
+  122 FUNC_STMT: DATA_TYPE VAR LB $@41 DEF_PARA RB CLN $@42 STATEMENTS RET . $@43 A_EXPN END
+
+    $default  reduce using rule 121 ($@43)
+
+    $@43  go to state 278
+
+
+State 277
+
+  131 PTR_STMT1: VAR EQ AT VAR COMMA . $@46 PTR_STMT1
+
+    $default  reduce using rule 130 ($@46)
+
+    $@46  go to state 279
+
+
+State 278
+
+  122 FUNC_STMT: DATA_TYPE VAR LB $@41 DEF_PARA RB CLN $@42 STATEMENTS RET $@43 . A_EXPN END
+
+    DIGIT1  shift, and go to state 76
+    DIGIT2  shift, and go to state 77
+    NOT     shift, and go to state 78
+    TRUE    shift, and go to state 79
+    FALSE   shift, and go to state 80
+    VAR     shift, and go to state 81
+    SQUOTE  shift, and go to state 82
+
+    A_EXPN      go to state 280
+    END_A_EXPN  go to state 84
+
+
+State 279
+
+  131 PTR_STMT1: VAR EQ AT VAR COMMA $@46 . PTR_STMT1
+
+    VAR  shift, and go to state 249
+
+    PTR_STMT1  go to state 281
+
+
+State 280
+
+   62 A_EXPN: A_EXPN . AND $@20 A_EXPN
+   64       | A_EXPN . OR $@21 A_EXPN
+   68       | A_EXPN . LT $@23 A_EXPN
+   70       | A_EXPN . GT $@24 A_EXPN
+   72       | A_EXPN . LE $@25 A_EXPN
+   74       | A_EXPN . GE $@26 A_EXPN
+   76       | A_EXPN . ET $@27 A_EXPN
+   78       | A_EXPN . NE $@28 A_EXPN
+   80       | A_EXPN . ADD $@29 A_EXPN
+   82       | A_EXPN . MIN $@30 A_EXPN
+   84       | A_EXPN . MULT $@31 A_EXPN
+   86       | A_EXPN . DIV $@32 A_EXPN
+   88       | A_EXPN . MOD $@33 A_EXPN
+  122 FUNC_STMT: DATA_TYPE VAR LB $@41 DEF_PARA RB CLN $@42 STATEMENTS RET $@43 A_EXPN . END
+
+    END   shift, and go to state 282
+    ADD   shift, and go to state 115
+    MIN   shift, and go to state 116
+    MULT  shift, and go to state 117
+    DIV   shift, and go to state 118
+    MOD   shift, and go to state 119
+    LT    shift, and go to state 120
+    GT    shift, and go to state 121
+    LE    shift, and go to state 122
+    GE    shift, and go to state 123
+    ET    shift, and go to state 124
+    NE    shift, and go to state 125
+    AND   shift, and go to state 126
+    OR    shift, and go to state 127
+
+
+State 281
+
+  131 PTR_STMT1: VAR EQ AT VAR COMMA $@46 PTR_STMT1 .
+
+    $default  reduce using rule 131 (PTR_STMT1)
+
+
+State 282
+
+  122 FUNC_STMT: DATA_TYPE VAR LB $@41 DEF_PARA RB CLN $@42 STATEMENTS RET $@43 A_EXPN END .
+
+    $default  reduce using rule 122 (FUNC_STMT)

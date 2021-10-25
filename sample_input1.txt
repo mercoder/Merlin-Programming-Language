@@ -1,0 +1,66 @@
+main function:
+start:
+~~variable declaration
+num sum_
+num i_
+num in_
+num y_
+sum = 0_
+y =0_
+dict<num> arr(5)_
+
+~* Demonstrating conditional 
+statements*~
+if (sum == 0):
+    print(sum)_
+else if (sum > 0):
+    print(sum)_
+else:
+    print(sum)_
+    
+if(y):
+    print(y)_
+
+if (sum == 0):
+    print(sum)_
+else:
+    print(sum)_
+stopif:
+    
+~~looping constructs
+while (true):
+    print(sum)_
+stopwhile:
+
+sum = 0_
+for i from 0 to 4 by 1:
+    sum = sum + i_
+stopfor:
+
+repeat 
+   print(sum)_
+until(0):
+
+~~goto statement
+goto skip:
+print(sum)_
+skip $
+print(sum)_
+
+~~Pointers
+string pointer var1 = @var2, var3 = @var4_
+pointer var1 = 'd'_
+pointer var2 = 'e'_
+
+~~user defined datatypes
+newtype num integer_
+integer x, z_
+z = 7_
+
+~~reading input
+input(in)_
+stop:
+
+inline num func(num a, string b):
+    print(sum)_
+return y_
